@@ -11,6 +11,7 @@ A paralisia de decisão e a falta de educação financeira. Muitos brasileiros p
 > Como o agente resolve esse problema de forma proativa?
 
 O agente atua como um Orientador de Investimentos Proativo. Ele utiliza o modelo GPT-4 para analisar o montante disponível, o horizonte de tempo e as preferências do cliente, cruzando esses dados com o seu perfil de investidor (suitability) para sugerir alocações diversificadas e educativas, explicando o "porquê" de cada sugestão.
+
 Privacidade Total: Diferente de soluções baseadas em nuvem, o FinAI Invest utiliza processamento local via Ollama, garantindo que o montante e os objetivos financeiros do usuário nunca saiam de sua máquina.
 
 ### Público-Alvo
