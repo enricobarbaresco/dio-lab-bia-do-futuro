@@ -11,6 +11,7 @@ A paralisia de decisão e a falta de educação financeira. Muitos brasileiros p
 > Como o agente resolve esse problema de forma proativa?
 
 O agente atua como um Orientador de Investimentos Proativo. Ele utiliza o modelo GPT-4 para analisar o montante disponível, o horizonte de tempo e as preferências do cliente, cruzando esses dados com o seu perfil de investidor (suitability) para sugerir alocações diversificadas e educativas, explicando o "porquê" de cada sugestão.
+Privacidade Total: Diferente de soluções baseadas em nuvem, o FinAI Invest utiliza processamento local via Ollama, garantindo que o montante e os objetivos financeiros do usuário nunca saiam de sua máquina.
 
 ### Público-Alvo
 > Quem vai usar esse agente?
@@ -47,22 +48,22 @@ Acessível, mas Profissional. Evita "juridiquês" financeiro desnecessário, mas
 
 ```mermaid
 flowchart TD
-    A[Cliente] -->|Mensagem| B[Interface]
-    B --> C[LLM]
-    C --> D[Base de Conhecimento]
-    D --> C
-    C --> E[Validação]
-    E --> F[Resposta]
+    A[Cliente] -->|Browser| B[Interface Streamlit]
+    B --> C{Ollama}
+    C -->|Modelo Local| D[Llama 3 / Mistral]
+    D --> E[Lógica de Suitability]
+    E --> D
+    D --> F[Resposta na Tela]
 ```
 
 ### Componentes
 
 | Componente | Descrição |
 |------------|-----------|
-| Interface | Terminal Python com integração de Voz (Whisper + gTTS) |
-| LLM | GPT-4o-mini (via OpenAI API) configurado com System Prompt rigoroso |
+| Interface | Streamlit (Web UI moderna e interativa no navegador) |
+| LLM | Ollama executando modelos como Llama3-8b ou Mistral |
 | Base de Conhecimento | Arquivo JSON contendo matrizes de risco (Conservador, Moderado, Arrojado) |
-| Validação | Camada de verificação para garantir que nenhuma promessa de "lucro garantido" seja feita |
+| Validação | Camada de filtragem via Regex ou System Prompt no Ollama |
 
 ---
 
@@ -70,21 +71,19 @@ flowchart TD
 
 ### Estratégias Adotadas
 
-[x] Agente restrito: O agente só sugere classes de ativos baseadas no perfil de investidor detectado.
+[x] System Prompt Rígido: Instruir o Ollama a atuar estritamente como consultor, proibindo palpites sobre política, esportes ou conselhos médicos.
 
-[x] Princípio da Transparência: Toda resposta inclui um aviso de que "rentabilidade passada não garante resultados futuros".
+[x] Estrutura de Decisão: Forçar o modelo a perguntar "Qual seu prazo?" e "Qual sua tolerância a perdas?" antes de citar qualquer produto (ex: Tesouro Direto ou CDB).
 
-[x] Admissão de Ignorância: Se o usuário perguntar sobre criptoativos obscuros ou esquemas duvidosos, o agente admite não ter dados e alerta sobre os riscos.
-
-[x] Obrigatoriedade de Perfil: O agente é instruído a não dar sugestões sem antes confirmar o montante e o prazo do investimento.
+[x] Aviso de Isenção local: Exibir um disclaimer fixo no rodapé do Streamlit sobre riscos de mercado.
 
 ### Limitações Declaradas
 > O que o agente NÃO faz?
 
-Não realiza operações de compra ou venda (execução).
-
-Não garante rentabilidade fixa em ativos de renda variável.
-
 Não solicita senhas ou dados bancários do usuário.
 
 Não substitui a consulta a um assessor de investimentos certificado (CVM/ANBIMA) para decisões complexas.
+
+O agente depende do hardware local (CPU/GPU do usuário) para velocidade de resposta.
+
+Não possui acesso à internet para buscar o valor do Dólar ou Selic do dia (a menos que você configure uma API de terceiros).
