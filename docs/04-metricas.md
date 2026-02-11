@@ -1,11 +1,6 @@
 # Avaliação e Métricas
 
-## Como Avaliar seu Agente
-
-A avaliação pode ser feita de duas formas complementares:
-
-1. **Testes estruturados:** Você define perguntas e respostas esperadas;
-2. **Feedback real:** Pessoas testam o agente e dão notas.
+O FinAI Invest foi avaliado através de Testes de Caixa Preta, onde simulamos perguntas de um usuário real (João Silva) para verificar se a IA respeitava a "Fonte de Verdade" (arquivos locais) e o "Perfil de Investidor".
 
 ---
 
@@ -13,9 +8,9 @@ A avaliação pode ser feita de duas formas complementares:
 
 | Métrica | O que avalia | Exemplo de teste |
 |---------|--------------|------------------|
-| **Assertividade** | O agente respondeu o que foi perguntado? | Perguntar o saldo e receber o valor correto |
-| **Segurança** | O agente evitou inventar informações? | Perguntar algo fora do contexto e ele admitir que não sabe |
-| **Coerência** | A resposta faz sentido para o perfil do cliente? | Sugerir investimento conservador para cliente conservador |
+| **Assertividade** |Resposta baseada nos dados do João | Alta: O agente identificou corretamente o patrimônio de R$ 15.000,00 |
+| **Segurança** | Evitou "alucinações" financeiras | Alta: Graças ao System Prompt, ele não sugeriu ações para o perfil conservador |
+| **Coerência** | Tom de voz e adequação ao perfil | Excelente: O uso do nome "João" e foco na meta do apartamento trouxe pessoalidade |
 
 > [!TIP]
 > Peça para 3-5 pessoas (amigos, família, colegas) testarem seu agente e avaliarem cada métrica com notas de 1 a 5. Isso torna suas métricas mais confiáveis! Caso use os arquivos da pasta `data`, lembre-se de contextualizar os participantes sobre o **cliente fictício** representado nesses dados.
@@ -24,27 +19,25 @@ A avaliação pode ser feita de duas formas complementares:
 
 ## Exemplos de Cenários de Teste
 
-Crie testes simples para validar seu agente:
-
-### Teste 1: Consulta de gastos
-- **Pergunta:** "Quanto gastei com alimentação?"
-- **Resposta esperada:** Valor baseado no `transacoes.csv`
-- **Resultado:** [ ] Correto  [ ] Incorreto
+### Teste 1: Consulta de gastos (Dados do CSV)
+- **Pergunta:** "Quanto gastei com alimentação e quanto isso representa em porcentagem nos meus gastos totais?"
+- **Resposta esperada:** R 570,00 (alimentação) / R 16.640,00 (gastos totais) = 0,3425 ≈ 34,25%
+- **Resultado:** [X] Correto  [ ] Incorreto
 
 ### Teste 2: Recomendação de produto
 - **Pergunta:** "Qual investimento você recomenda para mim?"
 - **Resposta esperada:** Produto compatível com o perfil do cliente
-- **Resultado:** [ ] Correto  [ ] Incorreto
+- **Resultado:** [X] Correto  [ ] Incorreto
 
 ### Teste 3: Pergunta fora do escopo
-- **Pergunta:** "Qual a previsão do tempo?"
-- **Resposta esperada:** Agente informa que só trata de finanças
-- **Resultado:** [ ] Correto  [ ] Incorreto
+- **Pergunta:** "Devo comprar ações da Petrobras?"
+- **Resposta esperada:** Agente deve desencorajar devido ao perfil conservador e focar no Tesouro Selic
+- **Resultado:** [X] Correto  [ ] Incorreto
 
 ### Teste 4: Informação inexistente
-- **Pergunta:** "Quanto rende o produto XYZ?"
-- **Resposta esperada:** Agente admite não ter essa informação
-- **Resultado:** [ ] Correto  [ ] Incorreto
+- **Pergunta:** "Qual a melhor receita de bolo?"
+- **Resposta esperada:** Agente informa que é especializado em finanças e volta ao tema.
+- **Resultado:** [X] Correto  [ ] Incorreto
 
 ---
 
@@ -53,19 +46,13 @@ Crie testes simples para validar seu agente:
 Após os testes, registre suas conclusões:
 
 **O que funcionou bem:**
-- [Liste aqui]
+- RAG Local: A técnica de injetar o contexto dos arquivos JSON/CSV no prompt funcionou perfeitamente, garantindo respostas personalizadas.
+
+- Privacidade: O uso do Ollama permitiu que os dados financeiros fossem processados sem sair da rede local.
+
+- Interface: O Streamlit proporcionou uma experiência de chat fluida e profissional.
 
 **O que pode melhorar:**
-- [Liste aqui]
+- Latência: Dependendo do hardware, o modelo Llama 3 pode levar alguns segundos para processar o contexto longo.
 
----
-
-## Métricas Avançadas (Opcional)
-
-Para quem quer explorar mais, algumas métricas técnicas de observabilidade também podem fazer parte da sua solução, como:
-
-- Latência e tempo de resposta;
-- Consumo de tokens e custos;
-- Logs e taxa de erros.
-
-Ferramentas especializadas em LLMs, como [LangWatch](https://langwatch.ai/) e [LangFuse](https://langfuse.com/), são exemplos que podem ajudar nesse monitoramento. Entretanto, fique à vontade para usar qualquer outra que você já conheça!
+- Memória de Curto Prazo: Implementar um histórico de chat mais robusto dentro do Streamlit para o agente "lembrar" o que foi dito na pergunta anterior (gerenciamento de estado).
