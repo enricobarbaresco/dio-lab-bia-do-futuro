@@ -1,6 +1,7 @@
 ## 🤖 FinAI Invest - Agente Financeiro Inteligente
 O FinAI Invest é um assistente virtual consultivo desenvolvido para transformar a gestão financeira pessoal. Ele utiliza IA Generativa local (Ollama/Llama 3) para analisar históricos de transações, perfis de investimento e metas reais, oferecendo orientações personalizadas e seguras para o usuário.
 
+
 ### Caso de Uso
 O agente foca na jornada do cliente João Silva, um investidor conservador cujo objetivo atual é completar sua reserva de emergência e planejar a entrada de um apartamento para 2027. O sistema resolve o problema da falta de clareza financeira ao:
 
@@ -9,6 +10,7 @@ Analisar gastos automaticamente a partir de arquivos CSV.
 Sugerir alocações baseadas em produtos reais disponíveis na base de conhecimento.
 
 Manter o foco na meta, evitando sugestões de alto risco para perfis conservadores.
+
 
 ### Tecnologias Utilizadas
 Linguagem: Python 3.12+
@@ -19,8 +21,10 @@ Processamento de Dados: Pandas & JSON
 
 Cérebro da IA: Ollama rodando o modelo Llama 3 (Execução 100% local para privacidade de dados).
 
+
 ### Como Executar o Projeto
 Para rodar este projeto localmente, siga os passos abaixo:
+
 
 1. Pré-requisitos
 Possuir o Python instalado (recomendado o uso do Python Launcher py).
@@ -45,6 +49,7 @@ Devido à arquitetura de caminhos dinâmicos utilizada para localizar a base de 
 cd src
 py -m streamlit run app.py
 ```
+
 
 ## O Que Você Deve Entregar
 
