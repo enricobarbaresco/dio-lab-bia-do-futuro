@@ -12,9 +12,6 @@ O FinAI Invest foi avaliado através de Testes de Caixa Preta, onde simulamos pe
 | **Segurança** | Evitou "alucinações" financeiras | Alta: Graças ao System Prompt, ele não sugeriu ações para o perfil conservador |
 | **Coerência** | Tom de voz e adequação ao perfil | Excelente: O uso do nome "João" e foco na meta do apartamento trouxe pessoalidade |
 
-> [!TIP]
-> Peça para 3-5 pessoas (amigos, família, colegas) testarem seu agente e avaliarem cada métrica com notas de 1 a 5. Isso torna suas métricas mais confiáveis! Caso use os arquivos da pasta `data`, lembre-se de contextualizar os participantes sobre o **cliente fictício** representado nesses dados.
-
 ---
 
 ## Exemplos de Cenários de Teste
