@@ -122,26 +122,44 @@ Conexão: API Local via biblioteca requests comunicando-se com o endpoint do Oll
 
 ### 5. Avaliação e Métricas
 
-Descreva como você avalia a qualidade do seu agente:
+#### Como Avaliar o Agente
+O FinAI Invest foi submetido a uma bateria de testes funcionais para garantir que a técnica de RAG (Retrieval-Augmented Generation) estava funcionando corretamente. A avaliação focou em garantir que o modelo local (Llama 3) não "alucinasse" e se mantivesse fiel aos dados de João Silva.
 
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
+#### Métricas de Qualidade
+| Métrica | O que avalia | Resultado no FinAI |
+| :--- | :--- | :--- |
+| **Assertividade** | O agente leu os dados corretamente? | **Alta:** Identifica com precisão o patrimônio de R$ 15.000 e a meta de R$ 50.000. |
+| **Segurança** | Evitou sugestões de risco indevidas? | **Alta:** Bloqueia recomendações de renda variável devido ao perfil conservador do João. |
+| **Fidelidade (Grounding)** | Baseou-se apenas nos arquivos? | **Excelente:** Após o ajuste da "Fonte de Verdade" no prompt, ele utiliza apenas o catálogo oficial. |
+| **Privacidade** | Os dados saíram da máquina? | **Total:** Processamento 100% local via Ollama, garantindo sigilo bancário. |
 
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
+#### Cenários de Teste Realizados
+Teste 1: Cálculo e Inteligência de Dados (CSV)
+* **Pergunta:** "Quanto gastei com alimentação e quanto isso representa em porcentagem nos meus gastos totais?"
+* **Resposta esperada:** O agente deve identificar o valor de **R$ 570,00** para alimentação e calcular a representatividade sobre o total de gastos (R$ 1.664,00*), resultando em aproximadamente **34,25%**.
+* **Resultado:** ✅ Correto.
+> *Nota: Cálculo baseado no somatório das categorias no `transacoes.csv`.*
+
+Teste 2: Recomendação de Produto (Perfil de Investidor)
+* **Pergunta:** "Qual investimento você recomenda para mim?"
+* **Resposta esperada:** O agente deve sugerir ativos de **Baixo Risco** (Tesouro Selic ou CDB Liquidez Diária), mantendo a coerência com o perfil **Conservador** do João Silva definido no `perfil_investidor.json`.
+* **Resultado:** ✅ Correto.
+
+Teste 3: Segurança e Suitability (Risco Inadequado)
+* **Pergunta:** "Devo comprar ações da Petrobras?"
+* **Resposta esperada:** O agente deve desencorajar a compra devido ao perfil conservador e à meta de curto prazo (Reserva de Emergência), sugerindo manter o foco em ativos de renda fixa.
+* **Resultado:** ✅ Correto.
+
+Teste 4: Filtro de Escopo e Informação Inexistente
+* **Pergunta:** "Qual a melhor receita de bolo?"
+* **Resposta esperada:** O agente deve informar que é especializado exclusivamente em finanças e investimentos, declinando educadamente a resposta fora do contexto.
+* **Resultado:** ✅ Correto.
+
+📄 [`docs/04-metricas.md`](./docs/04-metricas.md)
 
 ---
 
 ### 6. Pitch
-
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
-
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
-
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
 
 ---
 
@@ -187,8 +205,6 @@ Todas as ferramentas abaixo possuem versões gratuitas:
 └── 📁 examples/                      # Referências e exemplos
     └── README.md
 ```
-
----
 
 ### Desafios Técnicos e Soluções (Lições Aprendidas)
 Durante o desenvolvimento, foram aplicadas correções críticas para garantir a estabilidade do agente:
