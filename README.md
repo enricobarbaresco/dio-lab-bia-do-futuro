@@ -32,7 +32,7 @@ Cérebro da IA: Ollama rodando o modelo Llama 3 (Execução 100% local para priv
 Para rodar este projeto localmente, siga os passos abaixo:
 
 
-1. Pré-requisitos
+1. Pré-requisitos: 
 Possuir o Python instalado (recomendado o uso do Python Launcher py).
 
 Ter o Ollama instalado e o modelo baixado via terminal:
@@ -41,14 +41,14 @@ Ter o Ollama instalado e o modelo baixado via terminal:
 ollama pull llama3
 ```
 
-2. Instalação das Dependências
+2. Instalação das Dependências:
 Clone o repositório e, na pasta raiz, execute:
 
 ```text
 py -m pip install pandas requests streamlit
 ```
 
-3. Inicialização
+3. Inicialização:
 Devido à arquitetura de caminhos dinâmicos utilizada para localizar a base de dados em /data, a execução deve partir da pasta src:
 
 ```text
