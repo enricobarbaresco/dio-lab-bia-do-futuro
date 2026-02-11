@@ -1,4 +1,28 @@
 {
+  "perfis": [
+    {
+      "tipo": "Conservador",
+      "objetivo": "Preservação de capital e liquidez",
+      "tolerancia_risco": "Baixa",
+      "alocacao_sugerida": ["renda_fixa"],
+      "mensagem_alerta": "Priorizamos a segurança da sua reserva acima de tudo."
+    },
+    {
+      "tipo": "Moderado",
+      "objetivo": "Crescimento equilibrado com segurança",
+      "tolerancia_risco": "Média",
+      "alocacao_sugerida": ["renda_fixa", "fundo"],
+      "mensagem_alerta": "Buscamos um pouco mais de ganho, aceitando pequenas oscilações."
+    },
+    {
+      "tipo": "Arrojado",
+      "objetivo": "Maximização de ganhos no longo prazo",
+      "tolerancia_risco": "Alta",
+      "alocacao_sugerida": ["renda_fixa", "fundo", "acoes"],
+      "mensagem_alerta": "Você entende que o mercado oscila, visando o potencial do futuro."
+    }
+  ]
+  
   "nome": "João Silva",
   "idade": 32,
   "profissao": "Analista de Sistemas",
