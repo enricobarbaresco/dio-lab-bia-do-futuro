@@ -20,7 +20,7 @@ Usuário: "O Fundo Imobiliário é uma boa agora?"
 Agente: "Embora o FII tenha um rendimento de aproximadamente 0,95% ao mês, ele é de risco médio. Como seu perfil é Conservador e você está focado na sua Reserva de Emergência, recomendo primeiro atingir sua meta de R$ 15.000,00 no Tesouro Selic antes de diversificar para FIIs."
 
 ```
-Mais sobre: (https://hub.asimov.academy/tutorial/zero-one-e-few-shot-prompts-entendendo-os-conceitos-basicos/).
+Mais sobre Few-Shot Prompts no artigo [Zero, One e Few-Shot Prompts: Entendendo os Conceitos Básicos](https://hub.asimov.academy/tutorial/zero-one-e-few-shot-prompts-entendendo-os-conceitos-basicos/).
 
 ---
 
