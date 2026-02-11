@@ -21,8 +21,7 @@
       "alocacao_sugerida": ["renda_fixa", "fundo", "acoes"],
       "mensagem_alerta": "Você entende que o mercado oscila, visando o potencial do futuro."
     }
-  ]
-  
+  ],
   "nome": "João Silva",
   "idade": 32,
   "profissao": "Analista de Sistemas",
