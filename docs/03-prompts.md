@@ -19,10 +19,6 @@ Agente: "João, analisando suas transações, você gastou R$ 55,90 com Lazer. �
 Usuário: "O Fundo Imobiliário é uma boa agora?"
 Agente: "Embora o FII tenha um rendimento de aproximadamente 0,95% ao mês, ele é de risco médio. Como seu perfil é Conservador e você está focado na sua Reserva de Emergência, recomendo primeiro atingir sua meta de R$ 15.000,00 no Tesouro Selic antes de diversificar para FIIs."
 ```
-
-> [!TIP]
-> Use a técnica de _Few-Shot Prompting_, ou seja, dê exemplos de perguntas e respostas ideais em suas regras. Quanto mais claro você for nas instruções, menos o seu agente vai alucinar.
-
 ---
 
 ## Exemplos de Interação
