@@ -1,4 +1,4 @@
-## 🤖 FinAI Invest - Agente Financeiro Inteligente
+# 🤖 FinAI Invest - Agente Financeiro Inteligente
 O FinAI Invest é um assistente virtual consultivo desenvolvido para transformar a gestão financeira pessoal. Ele utiliza IA Generativa local (Ollama/Llama 3) para analisar históricos de transações, perfis de investimento e metas reais, oferecendo orientações personalizadas e seguras para o usuário.
 
 
@@ -51,24 +51,32 @@ py -m streamlit run app.py
 ```
 
 
-## O Que Você Deve Entregar
+## 1. Documentação do Agente
 
-### 1. Documentação do Agente
+### Caso de Uso
+Problema: Paralisia de decisão e insegurança financeira de investidores iniciantes diante de termos técnicos e produtos complexos.
 
-Defina **o que** seu agente faz e **como** ele funciona:
+Solução: O FinAI Invest atua como um mentor proativo que utiliza RAG (Retrieval-Augmented Generation) local para analisar o contexto real do usuário (transações e metas) e sugerir caminhos seguros, explicando o "porquê" de cada movimento financeiro.
 
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
+Diferencial: Privacidade absoluta. Ao utilizar o Ollama, os dados sensíveis do patrimônio do usuário nunca saem da máquina local.
 
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+Persona e Tom de Voz
+Personalidade: Consultivo, educativo e focado em segurança patrimonial.
+
+Tom: Acessível e profissional. Transforma o "juridiquês" financeiro em orientações práticas, sendo acolhedor com dúvidas básicas e rígido quanto aos riscos.
+
+Arquitetura e Segurança
+Arquitetura: Interface em Streamlit conectada via API ao Ollama (Modelo Llama 3).
+
+Segurança Anti-Alucinação: Implementação de "Fonte de Verdade" via System Prompt, forçando a IA a citar apenas produtos presentes no produtos_financeiros.json.
+
+Limitação: Não possui acesso à internet para cotações em tempo real; depende estritamente da base de dados fornecida.
+
+📄 [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
 
 ---
 
 ### 2. Base de Conhecimento
-
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
 
 | Arquivo | Formato | Descrição |
 |---------|---------|-----------|
@@ -77,33 +85,38 @@ Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alim
 | `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
 | `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
 
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
-
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
+📄 [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
 
 ---
 
 ### 3. Prompts do Agente
 
-Documente os prompts que definem o comportamento do seu agente:
+System Prompt (Resumo)
+"Você é o FinAI Invest. Baseie suas respostas EXCLUSIVAMENTE nos dados fornecidos. Se o perfil for Conservador, PRIORIZE Tesouro Selic e proíba Renda Variável. Use o nome do cliente (João Silva) para personalizar a fala."
 
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
+Exemplos de Interação (Few-Shot)
+Usuário: "Quanto gastei com lazer?"
 
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
+Agente: "João, você gastou R$ 55,90 com lazer. Esse controle é essencial para atingir sua meta de R$ 15.000,00 para a reserva até junho de 2026."
+
+Tratamento de Edge Cases
+Fora de Escopo: Se questionado sobre receitas ou temas não financeiros, o agente gentilmente redireciona o foco para as metas do usuário.
+
+Segurança: Bloqueia solicitações de dados de terceiros ou informações sensíveis não autorizadas.
+
+📄 [`docs/03-prompts.md`](./docs/03-prompts.md)
 
 ---
 
 ### 4. Aplicação Funcional
 
-Desenvolva um **protótipo funcional** do seu agente:
+A aplicação reside na pasta /src e utiliza o Streamlit para criar uma interface de chat moderna.
 
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
+Execução: py -m streamlit run app.py (dentro da pasta src).
 
-📁 **Pasta:** [`src/`](./src/)
+Conexão: API Local via biblioteca requests comunicando-se com o endpoint do Ollama na porta 11434.
+
+📁 [`src/`](./src/)
 
 ---
 
