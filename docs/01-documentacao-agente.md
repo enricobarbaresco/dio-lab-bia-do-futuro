@@ -88,6 +88,6 @@ Não solicita senhas ou dados bancários do usuário.
 
 Não substitui a consulta a um assessor de investimentos certificado (CVM/ANBIMA) para decisões complexas.
 
-O agente depende do hardware local (CPU/GPU do usuário) para velocidade de resposta.
-
 Não possui acesso à internet para buscar o valor do Dólar ou Selic do dia (a menos que você configure uma API de terceiros).
+
+*O agente depende do hardware local (CPU/GPU do usuário) para velocidade de resposta.
