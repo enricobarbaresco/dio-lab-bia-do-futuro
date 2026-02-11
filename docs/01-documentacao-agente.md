@@ -72,6 +72,8 @@ flowchart TD
 
 ### Estratégias Adotadas
 
+[x] Foco na educação financeira e não em conselhos financeiros.
+
 [x] System Prompt Rígido: Instruir o Ollama a atuar estritamente como consultor, proibindo palpites sobre política, esportes ou conselhos médicos.
 
 [x] Estrutura de Decisão: Forçar o modelo a perguntar "Qual seu prazo?" e "Qual sua tolerância a perdas?" antes de citar qualquer produto (ex: Tesouro Direto ou CDB).
@@ -80,6 +82,7 @@ flowchart TD
 
 ### Limitações Declaradas
 > O que o agente NÃO faz?
+
 
 Não solicita senhas ou dados bancários do usuário.
 
