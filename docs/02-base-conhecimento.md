@@ -32,19 +32,14 @@ O produto Fundo Imobiliário (FII) substituiu o Fundo Multimercado, devido uma m
 Os dados são acessados localmente através das bibliotecas pandas (para os arquivos CSV) e json (para os arquivos JSON). O script realiza a leitura dos arquivos dentro da pasta data/ no momento da inicialização do agente, conforme o trecho de código abaixo:
 
 ```python
-import pandas as pd
 import json
+import panda as pd
 
-# Carregamento de CSVs (Histórico e Transações)
-historico = pd.read_csv('data/historico_atendimento.csv')
-transacoes = pd.read_csv('data/transacoes.csv')
-
-# Carregamento de JSONs (Perfil e Catálogo de Produtos)
-with open('data/perfil_investidor.json', 'r', encoding='utf-8') as f:
-    perfil = json.load(f)
-
-with open('data/produtos_financeiros.json', 'r', encoding='utf-8') as f:
-    produtos = json.load(f)
+# ========== CARREGAR DADOS ==========
+perfil = json.load(open('./data/perfil_investidor.json'))
+transacoes = pd.read_csv('/data/transacoes.csv')
+historico = pd.read_csv('/data/historico_atendimento.csv')
+produtos = json.load(open('/data/produtos_financeiros.json'))
 ```
 
 ### Como os dados são usados no prompt?
@@ -52,7 +47,7 @@ with open('data/produtos_financeiros.json', 'r', encoding='utf-8') as f:
 
 Os dados são consultados dinamicamente e injetados no System Prompt. Utilizamos uma técnica de "Context Injection" onde, a cada pergunta do usuário, o código seleciona as metas do João e o catálogo de produtos disponíveis, enviando-os como instruções de sistema para o Ollama. Isso força o modelo local a responder apenas com base no inventário real de produtos fornecido.
 
-```text
+```text  
 DADOS DO USUÁRIO:
 { 
  "nome": "João Silva",
