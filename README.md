@@ -1,18 +1,50 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+## 🤖 FinAI Invest - Agente Financeiro Inteligente
+O FinAI Invest é um assistente virtual consultivo desenvolvido para transformar a gestão financeira pessoal. Ele utiliza IA Generativa local (Ollama/Llama 3) para analisar históricos de transações, perfis de investimento e metas reais, oferecendo orientações personalizadas e seguras para o usuário.
 
-## Contexto
+### Caso de Uso
+O agente foca na jornada do cliente João Silva, um investidor conservador cujo objetivo atual é completar sua reserva de emergência e planejar a entrada de um apartamento para 2027. O sistema resolve o problema da falta de clareza financeira ao:
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
+Analisar gastos automaticamente a partir de arquivos CSV.
 
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
+Sugerir alocações baseadas em produtos reais disponíveis na base de conhecimento.
 
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+Manter o foco na meta, evitando sugestões de alto risco para perfis conservadores.
 
----
+### Tecnologias Utilizadas
+Linguagem: Python 3.12+
+
+Interface: Streamlit (Web UI interativa)
+
+Processamento de Dados: Pandas & JSON
+
+Cérebro da IA: Ollama rodando o modelo Llama 3 (Execução 100% local para privacidade de dados).
+
+### Como Executar o Projeto
+Para rodar este projeto localmente, siga os passos abaixo:
+
+1. Pré-requisitos
+Possuir o Python instalado (recomendado o uso do Python Launcher py).
+
+Ter o Ollama instalado e o modelo baixado via terminal:
+
+```text
+ollama pull llama3
+```
+
+2. Instalação das Dependências
+Clone o repositório e, na pasta raiz, execute:
+
+```text
+py -m pip install pandas requests streamlit
+```
+
+3. Inicialização
+Devido à arquitetura de caminhos dinâmicos utilizada para localizar a base de dados em /data, a execução deve partir da pasta src:
+
+```text
+cd src
+py -m streamlit run app.py
+```
 
 ## O Que Você Deve Entregar
 
@@ -140,10 +172,15 @@ Todas as ferramentas abaixo possuem versões gratuitas:
 
 ---
 
-## Dicas Finais
+### Desafios Técnicos e Soluções (Lições Aprendidas)
+Durante o desenvolvimento, foram aplicadas correções críticas para garantir a estabilidade do agente:
 
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
+Gestão de Caminhos (Pathing): Implementação da biblioteca os para mapear diretórios de forma dinâmica, permitindo que a aplicação encontre a base de dados independentemente de onde o terminal foi iniciado.
+
+Integridade de Dados (JSON): Correção de erros de sintaxe e delimitadores nos arquivos de conhecimento, garantindo que o parser do Python processe as informações sem interrupções.
+
+Ambiente Windows: Padronização dos comandos via py -m para evitar erros de reconhecimento do comando pip e python no PATH do sistema.
+
+Prompt Engineering: Estruturação de um System Prompt robusto para evitar alucinações, forçando o modelo a citar apenas dados reais da carteira do cliente.
 4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
 5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
