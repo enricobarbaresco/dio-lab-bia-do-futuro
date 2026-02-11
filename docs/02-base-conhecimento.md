@@ -35,7 +35,7 @@ Os dados são acessados localmente através das bibliotecas pandas (para os arqu
 import json
 import panda as pd
 
-# ========== CARREGAR DADOS ==========
+# ============ CARREGAR DADOS ============
 perfil = json.load(open('./data/perfil_investidor.json'))
 transacoes = pd.read_csv('/data/transacoes.csv')
 historico = pd.read_csv('/data/historico_atendimento.csv')
