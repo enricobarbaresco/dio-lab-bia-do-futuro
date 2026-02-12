@@ -1,0 +1,24 @@
+graph TD
+    subgraph Base_de_Conhecimento [Arquivos Locais]
+        A[(perfil_investidor.json)]
+        B[(transacoes.csv)]
+        C[(produtos_financeiros.json)]
+    end
+
+    subgraph Logica_Python [Core do Agente - Python/Pandas]
+        D[Carregamento de Dados]
+        E[Filtro de Suitability]
+        F[Montagem do Contexto]
+    end
+
+    subgraph IA_Local [Ollama - Llama 3]
+        G[System Prompt]
+        H[Processamento LLM]
+    end
+
+    A & B & C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+    H --> I[Resposta para o João Silva]
