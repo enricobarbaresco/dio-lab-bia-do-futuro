@@ -1,229 +1,297 @@
-# 🤖 FinAI Invest - Agente Financeiro Inteligente
-O FinAI Invest é um assistente virtual consultivo desenvolvido para transformar a gestão financeira pessoal. Ele utiliza IA Generativa local (Ollama/Llama 3) para analisar históricos de transações, perfis de investimento e metas reais, oferecendo orientações personalizadas e seguras para o usuário.
+# FinAI Invest - Educador Financeiro Inteligente
+
+Um assistente virtual consultivo que utiliza IA Generativa local para transformar a gestão financeira pessoal, oferecendo orientações personalizadas e seguras baseadas em análise de dados reais.
 
 ---
 
+## 📋 Sobre o Projeto
 
-### Caso de Uso
-O agente foca na jornada do cliente João Silva, um investidor conservador cujo objetivo atual é completar sua reserva de emergência e planejar a entrada de um apartamento para 2027. O sistema resolve o problema da falta de clareza financeira ao:
+O FinAI Invest resolve um problema comum: a paralisia de decisão financeira. Muitos brasileiros possuem capital para investir, mas sentem-se inseguros diante da complexidade dos produtos financeiros ou não sabem como alinhar seus objetivos pessoais aos ativos disponíveis no mercado.
 
-Analisar gastos automaticamente a partir de arquivos CSV.
+### Solução Implementada
 
-Sugerir alocações baseadas em produtos reais disponíveis na base de conhecimento.
+O agente atua como um mentor financeiro proativo que:
 
-Manter o foco na meta, evitando sugestões de alto risco para perfis conservadores.
+- Analisa automaticamente históricos de transações (CSV)
+- Cruza perfil de investidor com produtos financeiros disponíveis
+- Sugere alocações personalizadas baseadas em metas reais
+- Explica o "porquê" de cada recomendação de forma educativa
+- Mantém privacidade total: processamento 100% local via Ollama
+
+### Caso de Uso Real
+
+O sistema foi desenvolvido focando na jornada de João Silva, um analista de sistemas de 32 anos com perfil conservador que busca:
+
+- Completar sua reserva de emergência (R$ 15.000 até junho/2026)
+- Juntar entrada para apartamento (R$ 50.000 até dezembro/2027)
 
 ---
 
+## 🎯 Diferenciais
 
-### Tecnologias Utilizadas
-Linguagem: Python 3.12+
+**Privacidade Absoluta**: Ao utilizar Ollama com modelo Llama 3, todos os dados financeiros sensíveis são processados localmente, nunca saindo da máquina do usuário.
 
-Interface: Streamlit (Web UI interativa)
+**Anti-Alucinação**: Sistema de "Fonte de Verdade" via System Prompt força a IA a citar apenas produtos presentes na base de conhecimento, evitando sugestões indevidas.
 
-Processamento de Dados: Pandas & JSON
-
-Cérebro da IA: Ollama rodando o modelo Llama 3 (Execução 100% local para privacidade de dados).
+**Educativo**: Não apenas responde, mas ensina conceitos financeiros de forma acessível, transformando "juridiquês" em orientações práticas.
 
 ---
 
+## 🏗️ Arquitetura
 
-### Como Executar o Projeto
-Para rodar este projeto localmente, siga os passos abaixo:
+```
+┌─────────────┐
+│   Usuário   │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────────────┐
+│  Streamlit (UI)     │
+└──────┬──────────────┘
+       │
+       ▼
+┌─────────────────────┐
+│  Ollama API Local   │
+│  (porta 11434)      │
+└──────┬──────────────┘
+       │
+       ▼
+┌─────────────────────┐
+│  Llama 3 (Local)    │
+└──────┬──────────────┘
+       │
+       ▼
+┌─────────────────────────────┐
+│  Base de Conhecimento       │
+│  • perfil_investidor.json   │
+│  • produtos_financeiros.json│
+│  • transacoes.csv           │
+│  • historico_atendimento.csv│
+└─────────────────────────────┘
+```
 
+---
 
-1. Pré-requisitos: 
-Possuir o Python instalado (recomendado o uso do Python Launcher py).
+## 📂 Estrutura do Repositório
 
-Ter o Ollama instalado e o modelo baixado via terminal:
+```
+lab-agente-financeiro/
+│
+├── data/                              # Base de conhecimento
+│   ├── perfil_investidor.json         # Perfil e metas do João Silva
+│   ├── produtos_financeiros.json      # Catálogo de produtos (Tesouro, CDB, FII)
+│   ├── transacoes.csv                 # Histórico de gastos e aportes
+│   └── historico_atendimento.csv      # Atendimentos anteriores
+│
+├── src/                               # Código da aplicação
+│   ├── app.py                         # Interface Streamlit + gerenciamento de estado
+│   ├── agente.py                      # Integração com Ollama + lógica de RAG
+│   └── config.py                      # Funções de leitura e agregação de dados
+│
+├── docs/                              # Documentação completa
+│   ├── 01-documentacao-agente.md      # Caso de uso, persona e arquitetura
+│   ├── 02-base-conhecimento.md        # Estratégia de dados e RAG
+│   ├── 03-prompts.md                  # System prompt e exemplos
+│   ├── 04-metricas.md                 # Testes e avaliação
+│   └── 05-pitch.md                    # Roteiro de apresentação
+│
+├── assets/                            # Diagramas e recursos visuais
+├── requirements.txt                   # Dependências Python
+└── README.md                          # Este arquivo
+```
 
-```text
+---
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+
+1. **Python 3.12+** instalado
+2. **Ollama** instalado e configurado
+3. Modelo Llama 3 baixado:
+
+```bash
 ollama pull llama3
 ```
 
-2. Instalação das Dependências:
-Clone o repositório e, na pasta raiz, execute:
+### Instalação
 
-```text
-py -m pip install pandas requests streamlit
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/seu-usuario/lab-agente-financeiro.git
+cd lab-agente-financeiro
 ```
 
-3. Inicialização:
-Devido à arquitetura de caminhos dinâmicos utilizada para localizar a base de dados em /data, a execução deve partir da pasta src:
+2. Instale as dependências:
 
-```text
+```bash
+py -m pip install -r requirements.txt
+```
+
+### Execução
+
+**IMPORTANTE**: Devido à arquitetura de caminhos dinâmicos, execute a partir da pasta `src`:
+
+```bash
 cd src
 py -m streamlit run app.py
 ```
 
----
-
-## 1. Documentação do Agente
-
-### Caso de Uso
-Problema: Paralisia de decisão e insegurança financeira de investidores iniciantes diante de termos técnicos e produtos complexos.
-
-Solução: O FinAI Invest atua como um mentor proativo que utiliza RAG (Retrieval-Augmented Generation) local para analisar o contexto real do usuário (transações e metas) e sugerir caminhos seguros, explicando o "porquê" de cada movimento financeiro.
-
-Diferencial: Privacidade absoluta. Ao utilizar o Ollama, os dados sensíveis do patrimônio do usuário nunca saem da máquina local.
-
-Persona e Tom de Voz
-Personalidade: Consultivo, educativo e focado em segurança patrimonial.
-
-Tom: Acessível e profissional. Transforma o "juridiquês" financeiro em orientações práticas, sendo acolhedor com dúvidas básicas e rígido quanto aos riscos.
-
-Arquitetura e Segurança
-Arquitetura: Interface em Streamlit conectada via API ao Ollama (Modelo Llama 3).
-
-Segurança Anti-Alucinação: Implementação de "Fonte de Verdade" via System Prompt, forçando a IA a citar apenas produtos presentes no produtos_financeiros.json.
-
-Limitação: Não possui acesso à internet para cotações em tempo real; depende estritamente da base de dados fornecida.
-
-📄 [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+A aplicação abrirá automaticamente no navegador em `http://localhost:8501`
 
 ---
 
-### 2. Base de Conhecimento
+## 🧠 Engenharia de Prompts
 
-| Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `transacoes.csv` | CSV | Histórico de transações do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
-| `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
-| `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
-
-📄 [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
-
----
-
-### 3. Prompts do Agente
-
-System Prompt (Resumo)
-"Você é o FinAI Invest. Baseie suas respostas EXCLUSIVAMENTE nos dados fornecidos. Se o perfil for Conservador, PRIORIZE Tesouro Selic e proíba Renda Variável. Use o nome do cliente (João Silva) para personalizar a fala."
-
-Exemplos de Interação (Few-Shot)
-Usuário: "Quanto gastei com lazer?"
-
-Agente: "João, você gastou R$ 55,90 com lazer. Esse controle é essencial para atingir sua meta de R$ 15.000,00 para a reserva até junho de 2026."
-
-Tratamento de Edge Cases
-Fora de Escopo: Se questionado sobre receitas ou temas não financeiros, o agente gentilmente redireciona o foco para as metas do usuário.
-
-Segurança: Bloqueia solicitações de dados de terceiros ou informações sensíveis não autorizadas.
-
-📄 [`docs/03-prompts.md`](./docs/03-prompts.md)
-
----
-
-### 4. Aplicação Funcional
-
-A aplicação reside na pasta /src e utiliza o Streamlit para criar uma interface de chat moderna.
-
-Execução: py -m streamlit run app.py (dentro da pasta src).
-
-Conexão: API Local via biblioteca requests comunicando-se com o endpoint do Ollama na porta 11434.
-
-📁 [`src/`](./src/)
-
----
-
-### 5. Avaliação e Métricas
-
-#### Como Avaliar o Agente
-O FinAI Invest foi submetido a uma bateria de testes funcionais para garantir que a técnica de RAG (Retrieval-Augmented Generation) estava funcionando corretamente. A avaliação focou em garantir que o modelo local (Llama 3) não "alucinasse" e se mantivesse fiel aos dados de João Silva.
-
-#### Métricas de Qualidade
-| Métrica | O que avalia | Resultado no FinAI |
-| :--- | :--- | :--- |
-| **Assertividade** | O agente leu os dados corretamente? | **Alta:** Identifica com precisão o patrimônio de R$ 15.000 e a meta de R$ 50.000. |
-| **Segurança** | Evitou sugestões de risco indevidas? | **Alta:** Bloqueia recomendações de renda variável devido ao perfil conservador do João. |
-| **Fidelidade (Grounding)** | Baseou-se apenas nos arquivos? | **Excelente:** Após o ajuste da "Fonte de Verdade" no prompt, ele utiliza apenas o catálogo oficial. |
-| **Privacidade** | Os dados saíram da máquina? | **Total:** Processamento 100% local via Ollama, garantindo sigilo bancário. |
-
-#### Cenários de Teste Realizados
-Teste 1: Cálculo e Inteligência de Dados (CSV)
-* **Pergunta:** "Quanto gastei com alimentação e quanto isso representa em porcentagem nos meus gastos totais?"
-* **Resposta esperada:** O agente deve identificar o valor de **R$ 570,00** para alimentação e calcular a representatividade sobre o total de gastos (R$ 1.664,00*), resultando em aproximadamente **34,25%**.
-* **Resultado:** ✅ Correto.
-> *Nota: Cálculo baseado no somatório das categorias no `transacoes.csv`.*
-
-Teste 2: Recomendação de Produto (Perfil de Investidor)
-* **Pergunta:** "Qual investimento você recomenda para mim?"
-* **Resposta esperada:** O agente deve sugerir ativos de **Baixo Risco** (Tesouro Selic ou CDB Liquidez Diária), mantendo a coerência com o perfil **Conservador** do João Silva definido no `perfil_investidor.json`.
-* **Resultado:** ✅ Correto.
-
-Teste 3: Segurança e Suitability (Risco Inadequado)
-* **Pergunta:** "Devo comprar ações da Petrobras?"
-* **Resposta esperada:** O agente deve desencorajar a compra devido ao perfil conservador e à meta de curto prazo (Reserva de Emergência), sugerindo manter o foco em ativos de renda fixa.
-* **Resultado:** ✅ Correto.
-
-Teste 4: Filtro de Escopo e Informação Inexistente
-* **Pergunta:** "Qual a melhor receita de bolo?"
-* **Resposta esperada:** O agente deve informar que é especializado exclusivamente em finanças e investimentos, declinando educadamente a resposta fora do contexto.
-* **Resultado:** ✅ Correto.
-
-📄 [`docs/04-metricas.md`](./docs/04-metricas.md)
-
----
-
-### 6. Pitch
-
----
-
-## Ferramentas Sugeridas
-
-Todas as ferramentas abaixo possuem versões gratuitas:
-
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
-
----
-
-## Estrutura do Repositório
+### System Prompt (Resumo)
 
 ```
-📁 lab-agente-financeiro/
-│
-├── 📄 README.md
-│
-├── 📁 data/                          # Dados mockados para o agente
-│   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
-│   ├── perfil_investidor.json        # Perfil do cliente (JSON)
-│   ├── produtos_financeiros.json     # Produtos disponíveis (JSON)
-│   └── transacoes.csv                # Histórico de transações (CSV)
-│
-├── 📁 docs/                          # Documentação do projeto
-│   ├── 01-documentacao-agente.md     # Caso de uso e arquitetura
-│   ├── 02-base-conhecimento.md       # Estratégia de dados
-│   ├── 03-prompts.md                 # Engenharia de prompts
-│   ├── 04-metricas.md                # Avaliação e métricas
-│   └── 05-pitch.md                   # Roteiro do pitch
-│
-├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
-│
-├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
+Você é o FinAI Invest, especializado em orientação financeira para João Silva.
+
+REGRAS CRÍTICAS:
+1. FONTE DE VERDADE: Use APENAS dados dos arquivos fornecidos
+2. PERFIL CONSERVADOR: Priorize Tesouro Selic e CDB para reserva de emergência
+3. SEGURANÇA: Nunca garanta rentabilidade. Sempre avise sobre riscos
+4. EDUCAÇÃO: Explique o "porquê" de cada sugestão
+5. OBJETIVIDADE: Use valores reais do João para personalizar respostas
 ```
+
+### Técnicas Aplicadas
+
+- **Few-Shot Prompting**: Exemplos de perguntas e respostas ideais
+- **Context Injection**: Dados JSON/CSV injetados dinamicamente no prompt
+- **Guardrails**: Regras rígidas contra alucinação e sugestões inadequadas
+
+Ver documentação completa em [`docs/03-prompts.md`](docs/03-prompts.md)
 
 ---
 
-### Desafios Técnicos e Soluções (Lições Aprendidas)
-Durante o desenvolvimento, foram aplicadas correções críticas para garantir a estabilidade do agente:
+## 📊 Base de Conhecimento
 
-Gestão de Caminhos (Pathing): Implementação da biblioteca os para mapear diretórios de forma dinâmica, permitindo que a aplicação encontre a base de dados independentemente de onde o terminal foi iniciado.
+### Dados Mockados Utilizados
 
-Integridade de Dados (JSON): Correção de erros de sintaxe e delimitadores nos arquivos de conhecimento, garantindo que o parser do Python processe as informações sem interrupções.
+| Arquivo | Tipo | Finalidade |
+|---------|------|------------|
+| `perfil_investidor.json` | JSON | Perfil conservador, renda mensal R$ 5.000, patrimônio R$ 15.000 |
+| `produtos_financeiros.json` | JSON | Tesouro Selic, CDB, LCI/LCA, FII, Fundo de Ações |
+| `transacoes.csv` | CSV | Gastos categorizados (moradia, alimentação, transporte...) |
+| `historico_atendimento.csv` | CSV | Contexto de interações anteriores |
 
-Ambiente Windows: Padronização dos comandos via py -m para evitar erros de reconhecimento do comando pip e python no PATH do sistema.
+### Estratégia de RAG (Retrieval-Augmented Generation)
 
-Prompt Engineering: Estruturação de um System Prompt robusto para evitar alucinações, forçando o modelo a citar apenas dados reais da carteira do cliente.
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
+Os dados são carregados via `pandas` e `json`, formatados e injetados no System Prompt a cada interação:
+
+```python
+import json
+import pandas as pd
+
+perfil = json.load(open('../data/perfil_investidor.json'))
+produtos = json.load(open('../data/produtos_financeiros.json'))
+transacoes = pd.read_csv('../data/transacoes.csv')
+historico = pd.read_csv('../data/historico_atendimento.csv')
+```
+
+O contexto completo (perfil + produtos + resumo financeiro) é enviado ao Ollama para garantir respostas baseadas em fatos.
+
+Ver detalhes em [`docs/02-base-conhecimento.md`](docs/02-base-conhecimento.md)
+
+---
+
+## ✅ Avaliação e Métricas
+
+### Testes Realizados
+
+| Teste | Pergunta | Resultado |
+|-------|----------|-----------|
+| **Cálculo de Dados** | "Quanto gastei com alimentação?" | ✅ R$ 570,00 (34,25% do total) |
+| **Recomendação** | "Qual investimento você recomenda?" | ✅ Tesouro Selic (perfil conservador) |
+| **Segurança** | "Devo comprar ações da Petrobras?" | ✅ Desencorajou devido ao perfil |
+| **Escopo** | "Qual a melhor receita de bolo?" | ✅ Declinou educadamente |
+
+### Métricas de Qualidade
+
+| Métrica | Avaliação | Observação |
+|---------|-----------|------------|
+| **Assertividade** | Alta | Identifica corretamente patrimônio e metas |
+| **Segurança** | Alta | Bloqueia sugestões de risco indevidas |
+| **Fidelidade** | Excelente | Usa apenas catálogo oficial (anti-alucinação) |
+| **Privacidade** | Total | Processamento 100% local via Ollama |
+
+Ver testes completos em [`docs/04-metricas.md`](docs/04-metricas.md)
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Linguagem**: Python 3.12+
+- **Interface**: Streamlit (UI web interativa)
+- **LLM**: Ollama + Llama 3 (execução local)
+- **Processamento**: Pandas (CSV) + JSON nativo
+- **Comunicação**: Biblioteca `requests` (API REST)
+
+---
+
+## 💡 Lições Aprendidas
+
+### Desafios Técnicos Superados
+
+1. **Gestão de Caminhos**: Implementação da biblioteca `os` para mapear diretórios dinamicamente, permitindo execução independente do terminal
+
+2. **Integridade de Dados**: Correção de erros de sintaxe em JSON para garantir parsing sem interrupções
+
+3. **Ambiente Windows**: Padronização via `py -m` para evitar erros de PATH
+
+4. **Prompt Engineering**: Estruturação robusta do System Prompt para evitar alucinações, forçando citação apenas de dados reais
+
+5. **Latência**: Dependência de hardware local para velocidade de resposta (trade-off da privacidade)
+
+---
+
+## 🎬 Demonstração
+
+### Exemplos de Interação
+
+**Usuário**: "Quanto gastei com lazer?"
+
+**FinAI**: "João, você gastou R$ 55,90 com lazer. Esse controle é essencial para atingir sua meta de R$ 15.000,00 para a reserva até junho de 2026."
+
+---
+
+**Usuário**: "O Fundo Imobiliário é uma boa agora?"
+
+**FinAI**: "Embora o FII tenha rendimento de ~0,95% ao mês, ele é de risco médio. Como seu perfil é Conservador e você está focado na Reserva de Emergência, recomendo primeiro atingir sua meta de R$ 15.000,00 no Tesouro Selic antes de diversificar."
+
+---
+
+## 📝 Documentação Completa
+
+- **Caso de Uso e Arquitetura**: [`docs/01-documentacao-agente.md`](docs/01-documentacao-agente.md)
+- **Estratégia de Dados**: [`docs/02-base-conhecimento.md`](docs/02-base-conhecimento.md)
+- **Engenharia de Prompts**: [`docs/03-prompts.md`](docs/03-prompts.md)
+- **Testes e Avaliação**: [`docs/04-metricas.md`](docs/04-metricas.md)
+- **Roteiro de Pitch**: [`docs/05-pitch.md`](docs/05-pitch.md)
+
+---
+
+## 🔒 Segurança e Privacidade
+
+- ✅ Processamento 100% local (Ollama)
+- ✅ Dados financeiros nunca saem da máquina
+- ✅ System Prompt com guardrails contra alucinação
+- ✅ Validação de perfil antes de sugestões
+- ✅ Disclaimer sobre riscos de mercado
+
+---
+
+## 📄 Licença
+
+Este projeto foi desenvolvido para fins educacionais como parte de um desafio de IA Generativa.
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido como solução completa do desafio de Agente Financeiro Inteligente, demonstrando aplicação prática de RAG, prompt engineering e processamento local de dados sensíveis.
+
+**Nota**: O agente foi projetado para fins consultivos e educacionais. Não substitui a consulta a um assessor de investimentos certificado (CVM/ANBIMA) para decisões financeiras complexas.
