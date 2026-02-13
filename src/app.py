@@ -1,26 +1,28 @@
 import streamlit as st
-from agente import gerar_resposta_invest
+from agente import perguntar
 
-st.set_page_config(page_title="FinAI Invest", page_icon="💰")
+st.set_page_config(page_title="FinAI Invest", page_icon="📈")
 
-st.title("💰 FinAI Invest - Seu Assistente Local")
-st.markdown("---")
+st.title("📈 FinAI Invest")
+st.subheader("Seu Educador Financeiro Inteligente")
 
+# Inicializa o histórico se não existir
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Exibe histórico
+# Mostra mensagens anteriores
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+        st.write(message["content"])
 
-# Input do usuário
-if prompt := st.chat_input("Como posso ajudar seus investimentos hoje?"):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
-
-    with st.chat_message("assistant"):
-        resposta = gerar_resposta_invest(prompt)
-        st.markdown(resposta)
+# Entrada do usuário
+if pergunta := st.chat_input("Sua dúvida sobre finanças..."):
+    # Adiciona e mostra pergunta do usuário
+    st.session_state.messages.append({"role": "user", "content": pergunta})
+    st.chat_message("user").write(pergunta)
+    
+    # Gera e mostra resposta da IA
+    with st.spinner("Consultando dados e gerando recomendação..."):
+        resposta = perguntar(pergunta)
+        st.chat_message("assistant").write(resposta)
         st.session_state.messages.append({"role": "assistant", "content": resposta})
