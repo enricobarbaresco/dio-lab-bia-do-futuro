@@ -1,44 +1,22 @@
-# Pitch (3 minutos)
-
-> [!TIP]
-> Você pode usar alguns slides pra apoiar no seu Pitch e mostrar sua solução na prática.
+# Pitch
  
-## Roteiro Sugerido
-
-### 1. O Problema (30 seg)
+### 1. O Problema 
 > Qual dor do cliente você resolve?
 
-[Sua descrição aqui]
+A maioria das pessoas sofre com a complexidade financeira e o medo de investir. Consultores humanos são caros, e as IAs genéricas (nuvem) apresentam dois riscos críticos: a falta de contexto real (alucinação de dados) e a exposição de dados sensíveis e bancários em servidores de terceiros.
 
-### 2. A Solução (1 min)
+### 2. A Solução
 > Como seu agente resolve esse problema?
 
-[Sua descrição aqui]
+O FinAI Invest é um consultor de educação financeira que utiliza a arquitetura RAG (Retrieval-Augmented Generation). Ele conecta o modelo Llama 3 localmente aos dados reais do usuário (gastos e perfil de risco). O diferencial é o processamento 100% local via Ollama, garantindo que informações sobre saldo e patrimônio nunca saiam da máquina do usuário.
 
-### 3. Demonstração (1 min)
-> Mostre o agente funcionando (pode ser gravação de tela)
-
-[Descreva o que será mostrado]
-
-### 4. Diferencial e Impacto (30 seg)
+### 3. Diferencial e Impacto
 > Por que essa solução é inovadora e qual é o impacto dela na sociedade?
 
-[Sua descrição aqui]
+A inovação reside na soberania de dados. Em um mundo preocupado com a LGPD e privacidade, o FinAI Invest prova que é possível ter uma consultoria de alta performance sem abrir mão do sigilo bancário. O impacto é a democratização do planejamento financeiro seguro, permitindo que qualquer pessoa tenha um especialista em casa sem custos de assinatura ou riscos de privacidade.
 
 ---
 
-## Checklist do Pitch
+## Link do Vídeo de Apresentação
 
-- [ ] Duração máxima de 3 minutos
-- [ ] Problema claramente definido
-- [ ] Solução demonstrada na prática
-- [ ] Diferencial explicado
-- [ ] Áudio e vídeo com boa qualidade
-
----
-
-## Link do Vídeo
-
-> Cole aqui o link do seu pitch (YouTube, Loom, Google Drive, etc.)
-
-[Link do vídeo]
+[[Link do vídeo]](https://www.loom.com/share/db425be28b5e47379a160b448a96a637)
