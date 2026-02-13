@@ -135,7 +135,7 @@ py -m pip install -r requirements.txt
 
 ```bash
 cd src
-py -m streamlit run app.py
+py -m streamlit run main.py
 ```
 
 A aplicação abrirá automaticamente no navegador em `http://localhost:8501`
