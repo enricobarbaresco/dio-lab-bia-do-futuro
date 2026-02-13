@@ -1,6 +1,6 @@
 # FinAI Invest - Educador Financeiro Inteligente
 
-Um assistente virtual consultivo que utiliza IA Generativa local para transformar a gestão financeira pessoal, oferecendo orientações personalizadas e seguras baseadas em análise de dados reais.
+Um assistente virtual consultivo que utiliza IA Generativa local para transformar a gestão financeira pessoal, oferecendo orientações personalizadas e seguras baseadas em análise de dados reais. Os dados contidos no projeto são fictícios e estão sendo utilizados somente como exemplo/teste. 
 
 ---
 
