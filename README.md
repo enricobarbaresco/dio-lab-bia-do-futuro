@@ -4,7 +4,7 @@ Um assistente virtual consultivo que utiliza IA Generativa local para transforma
 
 ---
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 O FinAI Invest resolve um problema comum: a paralisia de decisão financeira. Muitos brasileiros possuem capital para investir, mas sentem-se inseguros diante da complexidade dos produtos financeiros ou não sabem como alinhar seus objetivos pessoais aos ativos disponíveis no mercado.
 
@@ -27,7 +27,7 @@ O sistema foi desenvolvido focando na jornada de João Silva, um analista de sis
 
 ---
 
-## 🎯 Diferenciais
+## Diferenciais
 
 **Privacidade Absoluta**: Ao utilizar Ollama com modelo Llama 3, todos os dados financeiros sensíveis são processados localmente, nunca saindo da máquina do usuário.
 
@@ -37,7 +37,7 @@ O sistema foi desenvolvido focando na jornada de João Silva, um analista de sis
 
 ---
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 ```
 ┌─────────────┐
@@ -72,7 +72,7 @@ O sistema foi desenvolvido focando na jornada de João Silva, um analista de sis
 
 ---
 
-## 📂 Estrutura do Repositório
+## Estrutura do Repositório
 
 ```
 lab-agente-financeiro/
@@ -102,7 +102,7 @@ lab-agente-financeiro/
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 
@@ -142,7 +142,7 @@ A aplicação abrirá automaticamente no navegador em `http://localhost:8501`
 
 ---
 
-## 🧠 Engenharia de Prompts
+## Engenharia de Prompts
 
 ### System Prompt (Resumo)
 
@@ -167,7 +167,7 @@ Ver documentação completa em [`docs/03-prompts.md`](docs/03-prompts.md)
 
 ---
 
-## 📊 Base de Conhecimento
+## Base de Conhecimento
 
 ### Dados Mockados Utilizados
 
@@ -198,7 +198,7 @@ Ver detalhes em [`docs/02-base-conhecimento.md`](docs/02-base-conhecimento.md)
 
 ---
 
-## ✅ Avaliação e Métricas
+## Avaliação e Métricas
 
 ### Testes Realizados
 
@@ -232,7 +232,7 @@ Ver testes completos em [`docs/04-metricas.md`](docs/04-metricas.md)
 
 ---
 
-## 💡 Lições Aprendidas
+## Lições Aprendidas
 
 ### Desafios Técnicos Superados
 
@@ -248,7 +248,7 @@ Ver testes completos em [`docs/04-metricas.md`](docs/04-metricas.md)
 
 ---
 
-## 🎬 Demonstração
+## Demonstração
 
 ### Exemplos de Interação
 
@@ -264,7 +264,7 @@ Ver testes completos em [`docs/04-metricas.md`](docs/04-metricas.md)
 
 ---
 
-## 📝 Documentação Completa
+## Documentação Completa
 
 - **Caso de Uso e Arquitetura**: [`docs/01-documentacao-agente.md`](docs/01-documentacao-agente.md)
 - **Estratégia de Dados**: [`docs/02-base-conhecimento.md`](docs/02-base-conhecimento.md)
@@ -274,7 +274,7 @@ Ver testes completos em [`docs/04-metricas.md`](docs/04-metricas.md)
 
 ---
 
-## 🔒 Segurança e Privacidade
+## Segurança e Privacidade
 
 - ✅ Processamento 100% local (Ollama)
 - ✅ Dados financeiros nunca saem da máquina
@@ -284,13 +284,13 @@ Ver testes completos em [`docs/04-metricas.md`](docs/04-metricas.md)
 
 ---
 
-## 📄 Licença
+## Licença
 
 Este projeto foi desenvolvido para fins educacionais como parte de um desafio de IA Generativa.
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 Desenvolvido como solução completa do desafio de Agente Financeiro Inteligente, demonstrando aplicação prática de RAG, prompt engineering e processamento local de dados sensíveis.
 
