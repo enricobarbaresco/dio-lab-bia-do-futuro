@@ -1,47 +1,26 @@
-import os
-import sounddevice as sd
-from scipy.io.wavfile import write
-from gtts import gTTS
-import playsound
-from config import LINGUAGEM
-from agente import processar_audio_para_texto, buscar_resposta_ia
+import streamlit as st
+from agente import gerar_resposta_invest
 
-def gravar_audio(segundos=5, nome_arquivo="request_audio.wav"):
-    """Passo 1: Captura áudio do microfone"""
-    fs = 44100
-    print(f"Ouvindo por {segundos} segundos...")
-    gravacao = sd.rec(int(segundos * fs), samplerate=fs, channels=1)
-    sd.wait()
-    write(nome_arquivo, fs, gravacao)
-    return nome_arquivo
+st.set_page_config(page_title="FinAI Invest", page_icon="💰")
 
-def falar(texto):
-    """Passo 4 e 5: Síntese e Reprodução"""
-    nome_resposta = "response.mp3"
-    if os.path.exists(nome_resposta):
-        os.remove(nome_resposta)
-    
-    gtts_obj = gTTS(text=texto, lang=LINGUAGEM, slow=False)
-    gtts_obj.save(nome_resposta)
-    playsound.playsound(nome_resposta)
+st.title("💰 FinAI Invest - Seu Assistente Local")
+st.markdown("---")
 
-def executar_assistente():
-    try:
-        # Execução do fluxo
-        arquivo_voz = gravar_audio(5)
-        
-        texto_usuario = processar_audio_para_texto(arquivo_voz, LINGUAGEM)
-        print(f"Você disse: {texto_usuario}")
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-        if texto_usuario.strip():
-            texto_ia = buscar_resposta_ia(texto_usuario)
-            print(f"IA: {texto_ia}")
-            falar(texto_ia)
-        else:
-            print("Áudio não compreendido.")
+# Exibe histórico
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-    except Exception as e:
-        print(f"Erro no sistema: {e}")
+# Input do usuário
+if prompt := st.chat_input("Como posso ajudar seus investimentos hoje?"):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
-if __name__ == "__main__":
-    executar_assistente()
+    with st.chat_message("assistant"):
+        resposta = gerar_resposta_invest(prompt)
+        st.markdown(resposta)
+        st.session_state.messages.append({"role": "assistant", "content": resposta})
