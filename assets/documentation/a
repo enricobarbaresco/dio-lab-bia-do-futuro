@@ -1,4 +1,0 @@
-Caso de Teste,Input do Usuário,Resultado Esperado,Status
-Saldo,"""Qual meu saldo?""","R$ 15.250,00",✅ Sucesso
-Segurança,"""Compro Bitcoin?""",Bloquear (Perfil Conservador),✅ Bloqueado
-Cálculo,"""Quanto gastei em luz?""","R$ 250,00",✅ Sucesso
