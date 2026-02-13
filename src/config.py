@@ -1,21 +1,30 @@
-import pandas as pd
 import json
+import pandas as pd
 import os
 
-def carregar_dados():
-    # Caminhos dos arquivos (ajuste conforme sua estrutura de pastas)
-    caminho_transacoes = 'data/transacoes.csv'
-    caminho_perfil = 'data/perfil_investidor.json'
-    
-    dados = {}
-    
-    if os.path.exists(caminho_transacoes):
-        df = pd.read_csv(caminho_transacoes)
-        dados['saldo_total'] = df['valor'].sum()
-        dados['gastos_recentes'] = df.to_dict(orient='records')
-    
-    if os.path.exists(caminho_perfil):
-        with open(caminho_perfil, 'r', encoding='utf-8') as f:
-            dados['perfil'] = json.load(f)
-            
-    return dados
+# Caminhos base
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "..", "data")
+
+def carregar_contexto():
+    """Lê CSVs e JSONs e monta a string de contexto para o RAG."""
+    perfil = json.load(open(os.path.join(DATA_DIR, 'perfil_investidor.json'), encoding='utf-8'))
+    transacoes = pd.read_csv(os.path.join(DATA_DIR, 'transacoes.csv'))
+    historico = pd.read_csv(os.path.join(DATA_DIR, 'historico_atendimento.csv'))
+    produtos = json.load(open(os.path.join(DATA_DIR, 'produtos_financeiros.json'), encoding='utf-8'))
+
+    contexto = f"""
+    CLIENTE: {perfil['nome']}, {perfil['idade']} anos, perfil {perfil['perfil_investidor']}
+    OBJETIVO: {perfil['objetivo_principal']}
+    PATRIMÔNIO: R$ {perfil['patrimonio_total']} | RESERVA: R$ {perfil['reserva_emergencia_atual']}
+
+    TRANSAÇÕES RECENTES:
+    {transacoes.to_string(index=False)}
+
+    ATENDIMENTOS ANTERIORES:
+    {historico.to_string(index=False)}
+
+    PRODUTOS DISPONÍVEIS:
+    {json.dumps(produtos, indent=2, ensure_ascii=False)}
+    """
+    return contexto
